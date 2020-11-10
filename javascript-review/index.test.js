@@ -59,8 +59,8 @@ describe('addFancy', () => {
     expect(app.addFancy(2, 10)).toBe(12);
   })
 
-  it('will add 1 to a single passed in number', () => {
-    expect(app.addFancy(10)).toBe(11);
+  it('add up all the numbers together when there is more than 2 numbers passed in', () => {
+    expect(app.addFancy(10, 10, 1)).toBe(21);
   })
 });
 
