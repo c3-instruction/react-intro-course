@@ -1,0 +1,121 @@
+const { multiplyTogether } = require('./index');
+const app = require('./index');
+
+describe.skip('varOrConst', () => {
+  it('will throw an error as created is no longer in scope', () => {
+    expect(app.varOrConst).toThrowError('created is not defined');
+  })
+});
+
+describe.skip('templateLiterals', () => {
+  it('will return a greeting to the passed in user', () => {
+    expect(app.templateLiterals('bob')).toBe('Hello bob how are you today?');
+  })
+});
+
+describe.skip('arrayCopy', () => {
+  it('will return a copied array', () => {
+    expect(app.arrayCopy([1, 4, 10])).toEqual([1, 4, 10])
+  })
+
+  it('will be a different array in memory', () => {
+    const arr = [5];
+    expect(app.arrayCopy(arr)).not.toBe(arr);
+  })
+});
+
+describe.skip('appendNewArray', () => {
+  it('will return a new array with the appended entry', () => {
+    expect(app.appendNewArray([1, 4, 10], 20)).toEqual([1, 4, 10, 20])
+  })
+});
+
+describe.skip('objectCopy', () => {
+  it('will return a new object with the appended entry', () => {
+    expect(app.objectCopy({ prop: true })).toEqual({ prop: true });
+  })
+});
+
+describe.skip('addToObject', () => {
+  it('will return a new object with the passed in property and avlue', () => {
+    expect(app.addToObject({name: 'jim'}, 'age', 40)).toEqual({ name: 'jim', age: 40 });
+  })
+});
+
+describe.skip('removeFromObject', () => {
+  it('will return a new object with the passed in property and avlue', () => {
+    expect(app.removeFromObject({name: 'jim', job: 'engineer'}, 'job')).toEqual({ name: 'jim'});
+  })
+});
+
+describe.skip('addBasic', () => {
+  it('will return the sum of 2 values', () => {
+    expect(app.addBasic(2, 10)).toBe(12);
+  })
+});
+
+describe.skip('addFancy', () => {
+  it('will return the sum of 2 values', () => {
+    expect(app.addFancy(2, 10)).toBe(12);
+  })
+
+  it('will add 1 to a single passed in number', () => {
+    expect(app.addFancy(10)).toBe(11);
+  })
+});
+
+describe.skip('addAll', () => {
+  it('will return the sum of 2 values', () => {
+    expect(app.addFancy(2, 10)).toBe(12);
+  })
+
+  it('will add 1 to a single passed in number', () => {
+    expect(app.addFancy(10)).toBe(11);
+  })
+});
+
+describe.skip('Person', () => {
+  let person = new app.Person('tim');
+  it('will return an person instance with a name property', () => {
+    expect(person).toEqual({name: 'tim'});
+  })
+
+  it('will add 1 to a single passed in number', () => {
+    expect(person.getName()).toBe('tim');
+  })
+});
+
+describe.skip('PersonClass', () => {
+  let person = new app.PersonClass('tim');
+  it('will return an person instance with a name property', () => {
+    expect(person).toEqual({name: 'tim'});
+  })
+
+  it('will add 1 to a single passed in number', () => {
+    expect(person.getName()).toBe('tim');
+  })
+});
+
+describe.skip('add10ToAll', () => {
+  it('will add 10 to every element passed in', () => {
+    expect(app.add10ToAll([1, 10, 100])).toEqual([10, 20, 110]);
+  });
+});
+
+describe.skip('add10ToAll', () => {
+  it('will add 10 to every element passed in', () => {
+    expect(app.add10ToAll([1, 10, 100])).toEqual([10, 20, 110]);
+  });
+});
+
+describe.skip('multiplyTogether', () => {
+  it('will multiply all items together', () => {
+    expect(app.multiplyTogether(10, 2, 5)).toEqual(100);
+  });
+});
+
+describe.skip('negateThenAdd', () => {
+  it('will negate each number then add them', () => {
+    expect(app.negateThenAdd(1, -10, 5, 4)).toEqual(0);
+  });
+});
