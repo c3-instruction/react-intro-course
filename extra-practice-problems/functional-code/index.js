@@ -95,7 +95,7 @@ function addAll(numbers) {
   
   array = [{name: 'sleeping', time 8}, {name: 'working out', time: 2},  {name: 'sleeping', time 4}]
    
-  return a number that is the total amout of time spent on the activity specifed for the name paramete
+  return a number that is the total amount of time spent on the activity specified for the name parameters
 
   for the above input this is what you would return
   12 

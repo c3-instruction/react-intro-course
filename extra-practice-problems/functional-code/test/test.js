@@ -33,7 +33,7 @@ describe('forEach exercises', () => {
 
 describe('map exercises', () => {
   describe('timesTen', () => {
-    it('will take an array of numbers and return a new array, where each element is multipied by 10', () => {
+    it('will take an array of numbers and return a new array, where each element is multiplied by 10', () => {
       let numbers = [1, 10, 100]
       let newNumbers = lib.timesTen(numbers)
       expect(newNumbers).to.eql([10,100,1000]) 
