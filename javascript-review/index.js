@@ -2,28 +2,31 @@
 // Make this function crash when ran by scoping created properly
 function varOrConst() {
   if (true) {
-    var created = true;
+    const created = true;
   }
   console.log(created);
 }
 
-// Rewrite The below to use a tempalate string
+// Rewrite The below to use a template string
 function templateLiterals(name) {
-  const str = 'Hello ' + name + ' how are you today?'
+  //const str = 'Hello ' + name + ' how are you today?'
+  const str = `Hello ${name} how are you today?`;
   return str;
 }
 
 // Return a copy of the passed in array using spreads
 function arrayCopy(array) {
+  return [...array];
 }
 
 // Return a new array with item appended to the end of the passed in array using spreads
 function appendNewArray(array, item) {
+  return [...array, item];
 }
 
 // Return a copy of the object using spreads
 function objectCopy(obj) {
-
+  return { ...obj };
 }
 
 /*
@@ -33,17 +36,24 @@ function objectCopy(obj) {
   i.e. addToObject({name: 'tammy}, 'age', 20) => {name: 'tammy' age: 20}
 */
 function addToObject(obj, key, value) {
+   const newObj = { ...obj };
+   newObj[key] = value;
 
+   // with dymamic props one liner
+   //return { ...obj, [key]: value};
+   return newObj;
 }
 
 // Return a new obj with the passed in key removed
 function removeFromObject(obj, key) {
-
+  const newObj = { ...obj };
+  delete newObj[key];
+  return newObj;
 }
 
 // Add two parameters to this function. Return the summed value
-function addBasic() {
-
+function addBasic(x, y) {
+  return x + y;
 }
 
 /*
@@ -54,14 +64,18 @@ function addBasic() {
 
 Note: you must add parameters to this function
 */
-function addFancy() {
-
+function addFancy(x, y=1) {
+  return x + y;
 }
 
 // addAll will add together n numbers passed in addAll(2, 5, 10, 10) => 27
 // Note: you must add parameters to this function
-function addAll() {
-
+function addAll(...args) {
+  let sum = 0;
+  for (let i = 0; i < args.length; i++) {
+    sum += args[i];
+  }
+  return sum;
 }
 
 /*
@@ -77,23 +91,19 @@ Person.prototype.getName = function() {
 
 //Make an es6 class based version of the Person constructor
 class PersonClass {
-
 }
 
 // return a new array with 10 added to every element
 function add10ToAll(array) {
-
 }
 
 // multiply all passed in numbers together
 function multiplyTogether(array) {
-
 }
 
 // negate each number, then add them all together
 // i.e. [1, -10, 5, 4] => [-1, 10, -5, -4] => 0
 function negateThenAdd(array) {
-  
 }
 
 
