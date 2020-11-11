@@ -37,13 +37,13 @@ describe('objectCopy', () => {
 });
 
 describe('addToObject', () => {
-  it('will return a new object with the passed in property and avlue', () => {
+  it('will return a new object with the passed in property and value', () => {
     expect(app.addToObject({name: 'jim'}, 'age', 40)).toEqual({ name: 'jim', age: 40 });
   })
 });
 
 describe('removeFromObject', () => {
-  it('will return a new object with the passed in property and avlue', () => {
+  it('will return a new object with the passed in property and value', () => {
     expect(app.removeFromObject({name: 'jim', job: 'engineer'}, 'job')).toEqual({ name: 'jim'});
   })
 });
