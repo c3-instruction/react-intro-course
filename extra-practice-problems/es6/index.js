@@ -1,5 +1,5 @@
 /*
-  In most langauges curly braces always create a scope. This isn't the case be default
+  In most languages curly braces always create a scope. This isn't the case be default
   in JavaScript. var x can be accessed outside of the if statement. Make the tests
   pass by using let
 */
@@ -89,7 +89,7 @@ function objectDestructuring(obj) {
   let model
   let year
   // Dont edit code above this
-  // Note: you must wrap the destructure in parens since we arent declaring the variables here
+  // Note: you must wrap the destructure in parens since we aren't declaring the variables here
   // Don't edit code below this
   return {model, year}
 }
@@ -127,7 +127,7 @@ function arraySpread(array) {
 
 /*
   create and return a new array that copies all the values from the old object,,
-  and adds propepety called copied with a value of true
+  and adds a property called copied with a value of true
 
   obj = {name: 'beth'}
 
