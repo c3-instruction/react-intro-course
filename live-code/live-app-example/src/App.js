@@ -107,6 +107,16 @@ class TurtleForm extends React.Component {
       },
       body: JSON.stringify(turtle),
     });
+
+    // To repull the data if you aren't doing live local
+    // updates via setState
+    /*
+    const res = await fetch('/turtles');
+    const data = await res.json();
+    this.setState({
+      turtleData: data
+    })
+    */
     // handle response as you see fit...
   }
 
