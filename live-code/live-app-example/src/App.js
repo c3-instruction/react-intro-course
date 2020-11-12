@@ -53,31 +53,71 @@ class TurtleForm extends React.Component {
     super(props);
     this.state = {
       name: 'What is your turtle name?',
+      shellRadius: 0,
+      environment: '',
+      country: '',
+      owner: '',
     }
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit  = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
+    const field = event.target.name;
+    const { value } = event.target;
     this.setState({
-      name: event.target.value,
-    })
+      ...this.state,
+      [field]: value,
+    });
+    /* kinda long... but it works
+    switch (field) {
+      case 'name':
+        this.setState({
+          name: value,
+          shellRadius: this.state.shellRadius,
+        })
+        break
+      case 'shellRadius':
+        this.setState({
+          name: this.state.name,
+          shellRadius: value,
+
+        })
+        break;
+    }
+    */
   }
 
   handleSubmit(event) {
     event.preventDefault();
     this.props.addTurtleFromForm({
       name: this.state.name,
+      shellRadius: this.state.shellRadius
     })
+
   }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
-          Name:
-          <input type='text' value={this.state.name} onChange={this.handleChange}/>
+          Name: <input type='text' name='name' value={this.state.name} onChange={this.handleChange}/>
+        </label>
+        <label>
+          Shell Radius:
+          <input type='number' name='shellRadius' value={this.state.shellRadius} onChange={this.handleChange}/>
+        </label>
+        <label>
+          Environment:
+          <input type='text' name='environment' value={this.state.environment} onChange={this.handleChange}/>
+        </label>
+        <label>
+          Country:
+          <input type='text' name='country' value={this.state.country} onChange={this.handleChange}/>
+        </label>
+        <label>
+          Owner:
+          <input type='text' name='owner' value={this.state.country} onChange={this.handleChange}/>
         </label>
         <input type='submit' value='Create a turtle'/>
       </form>
