@@ -36,7 +36,6 @@ TurtleUser.propTypes = {
   shellRadius: propTypes.number.isRequired,
   environment: propTypes.string.isRequired,
   country: propTypes.string.isRequired,
-  owner: propTypes.string,
 }
 
 
@@ -56,7 +55,6 @@ class TurtleForm extends React.Component {
       shellRadius: 0,
       environment: '',
       country: '',
-      owner: '',
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit  = this.handleSubmit.bind(this);
@@ -90,12 +88,28 @@ class TurtleForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.addTurtleFromForm({
-      name: this.state.name,
-      shellRadius: this.state.shellRadius
-    })
-
+    this.props.addTurtleFromForm(this.state)
+    this.postTurtle(this.state);
+    this.setState({
+      name: 'What is your turtle name?',
+      shellRadius: 0,
+      environment: '',
+      country: '',
+    });
   }
+
+  async postTurtle(turtle) {
+    const response = await fetch('/turtles', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(turtle),
+    });
+    // handle response as you see fit...
+  }
+
 
   render() {
     return (
@@ -117,7 +131,7 @@ class TurtleForm extends React.Component {
         </label>
         <label>
           Owner:
-          <input type='text' name='owner' value={this.state.country} onChange={this.handleChange}/>
+          <input type='text' name='owner' value={this.state.owner} onChange={this.handleChange}/>
         </label>
         <input type='submit' value='Create a turtle'/>
       </form>
@@ -133,10 +147,12 @@ class TurtleList extends React.Component {
 
     this.state = {
       turtleData: [],
+      filterValue: 'all',
     };
 
     this.addTurtle = this.addTurtle.bind(this);
     this.addTurtleFromForm = this.addTurtleFromForm.bind(this);
+    this.handleFilter = this.handleFilter.bind(this);
   }
 
   async componentDidMount() {
@@ -180,13 +196,34 @@ class TurtleList extends React.Component {
     });
   }
 
+  handleFilter(event) {
+    this.setState({
+      filterValue: event.target.value
+    })
+  }
+
   render() {
     // this.state && this.props available
     // save space with a jsx spread
-    const turtleComponents = this.state.turtleData.map(turtle => (<TurtleUser key={nanoid()} {...turtle} />));
+    const turtleComponents = this.state.turtleData
+      .filter(turtle => {
+        if (this.state.filterValue === 'all') {
+          return true;
+        }
+        return turtle.environment === this.state.filterValue;
+      })
+      .map(turtle => (<TurtleUser key={nanoid()} {...turtle} />));
     return (
       <section>
         <TurtleForm addTurtleFromForm={this.addTurtleFromForm}/>
+        <select value={this.state.filterValue} onChange={this.handleFilter}>
+          <option value='all'>All Types</option>
+          <option value='ocean'>Ocean</option>
+          <option value='urban'>Urban</option>
+          <option value='land'>Land</option>
+          <option value='space'>Space</option>
+          <option value='sky'>Sky</option>
+        </select>
         {turtleComponents}
         <RandomTurtleMaker addTurtle={this.addTurtle}/>
       </section>
