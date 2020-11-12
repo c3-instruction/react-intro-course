@@ -105,6 +105,21 @@ class MonsterClass {
   }
 }
 
+class HealingMonster extends MonsterClass {
+  constructor(name, health, amountToHeal) {
+    super(name, health);
+    this.amountToHeal = amountToHeal;
+  }
+
+  heal() {
+    this.health += this.amountToHeal
+  }
+
+  dealDamage(damage) {
+    super(damage * 2);
+  }
+}
+
 const mob = new MonsterClass('dragon', 100);
 // manually bind
 // const getHealth = MonsterClass.prototype.getHealth.bind(mob);

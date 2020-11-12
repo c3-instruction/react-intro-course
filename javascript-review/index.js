@@ -84,26 +84,38 @@ function addAll(...args) {
   function which will return it.  
 */
 function Person(name) {
+  this.name = name;
 }
 
 Person.prototype.getName = function() {
+  return this.name;
 }
 
 //Make an es6 class based version of the Person constructor
 class PersonClass {
+  constructor(name) {
+    this.name = name;
+  }
+
+  getName() {
+    return this.name;
+  }
 }
 
 // return a new array with 10 added to every element
 function add10ToAll(array) {
+  return array.map(n => n + 10);
 }
 
 // multiply all passed in numbers together
 function multiplyTogether(array) {
+  return multiplyTogether((total, n) => total * n);
 }
 
 // negate each number, then add them all together
 // i.e. [1, -10, 5, 4] => [-1, 10, -5, -4] => 0
 function negateThenAdd(array) {
+  return array.map(n => -n).reduce((total, n) => total + n);
 }
 
 

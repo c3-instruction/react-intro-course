@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useHook } from 'react';
 import Header from './components/Header'
 import './App.css';
 import propTypes from 'prop-types';
@@ -45,6 +45,53 @@ const RandomTurtleMaker = ({addTurtle}) => {
       <button onClick={() => addTurtle()}>Add a new random turtle!</button>
     </div>
   );
+}
+
+
+const TurtleFormHookVersion = ({addTurtleFromForm}) => {
+  // useState is your replacement for constructor + this.state
+  /*
+  const [turtle, setTurtle] = useState({
+    name: 'What is your turtle name?',
+    shellRadius: 0,
+    environment: '',
+    country: '',
+  })
+  */
+  const [name, setName] = useState('What is your turtle name?');
+  const [shellRadius, setShellRadius] = useState(0);
+  const [environment, setEnvironment] = useState('');
+  const [country, setCountry] = useState('');
+
+  function submitTurtle(event, turtle) {
+    event.preventDefault();
+    addTurtleFromForm(turtle);
+    setName('What is your turtle name?')
+    setShellRadius(0);
+    setEnvironment('');
+    setCountry('');
+  }
+
+  return (
+    <form onSubmit={(event) => submitTurtle(event, {name, shellRadius, environment, country})}>
+      <label>
+        Name: <input type='text' name='name' value={name} onChange={(e) => setName(e.target.value)} />
+      </label>
+      <label>
+        Shell Radius:
+          <input type='number' name='shellRadius' value={shellRadius} onChange={e => setShellRadius(e.target.value)} />
+      </label>
+      <label>
+        Environment:
+          <input type='text' name='environment' value={environment} onChange={e => setEnvironment(e.target.value)} />
+      </label>
+      <label>
+        Country:
+          <input type='text' name='country' value={country} onChange={e => setCountry(e.target.value)} />
+      </label>
+      <input type='submit' value='Create a turtle' />
+    </form>
+  )
 }
 
 class TurtleForm extends React.Component {
@@ -225,7 +272,7 @@ class TurtleList extends React.Component {
       .map(turtle => (<TurtleUser key={nanoid()} {...turtle} />));
     return (
       <section>
-        <TurtleForm addTurtleFromForm={this.addTurtleFromForm}/>
+        <TurtleFormHookVersion addTurtleFromForm={this.addTurtleFromForm}/>
         <select value={this.state.filterValue} onChange={this.handleFilter}>
           <option value='all'>All Types</option>
           <option value='ocean'>Ocean</option>
