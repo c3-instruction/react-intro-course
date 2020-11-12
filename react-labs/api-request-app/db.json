@@ -1,0 +1,6 @@
+{
+  "posts": [
+    { "id": 1, "title": "Learning React", "author": "Charlie", "mainText": "We are now learning how to make REST API React apps!" },
+    { "id": 2, "title": "Learning Fetch", "author": "Charlie", "mainText": "That data is so FETCH" }
+  ]
+}
