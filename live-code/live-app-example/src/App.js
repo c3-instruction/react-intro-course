@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from './components/Header'
 import './App.css';
 
 const TurtleUser = ({ 
@@ -16,45 +17,8 @@ const TurtleUser = ({
     </div>
 );
 
-const initialData = [
-  {
-    name: 'Gamera',
-    shellRadius: 40,
-    favoriteFood: 'lava',
-    environment: 'sky',
-    country: 'japan'
-  },
-  {
-    name: 'Leonardo',
-    shellRadius: 1.5,
-    favoriteFood: 'pizza',
-    environment: 'urban',
-    country: 'USA'
-  },
-  {
-    name: 'Leonardo',
-    shellRadius: 1.5,
-    favoriteFood: 'pizza',
-    environment: 'urban',
-    country: 'USA'
-  },
-  {
-    name: 'Crush',
-    shellRadius: 0.5,
-    favoriteFood: 'sea food',
-    environment: 'ocean',
-    country: 'Aus'
-  },
-]
 
 const RandomTurtleMaker = ({addTurtle}) => {
-  /*
-  const timeoutId = setTimeout(() => {
-    clearTimeout(timeoutId);
-    addTurtle();
-  }, 10000)
-  */
-
   return (
     <div>
       <button onClick={() => addTurtle()}>Add a new random turtle!</button>
@@ -68,10 +32,26 @@ class TurtleList extends React.Component {
     super(props);
 
     this.state = {
-      turtleData: initialData,
+      turtleData: [],
     };
 
     this.addTurtle = this.addTurtle.bind(this);
+  }
+
+  async componentDidMount() {
+    try {
+      const response = await fetch('/turtles');
+      const body = await response.json();
+      this.setState({
+        turtleData: body
+      });
+    } catch (err) {
+      console.error('There was a problem reaching the endpoint! Are you connected?');
+    }
+  }
+
+  componentWillUnmount() {
+    // cleanup
   }
 
   addTurtle() {
@@ -94,6 +74,7 @@ class TurtleList extends React.Component {
   }
 
   render() {
+    // this.state && this.props available
     // save space with a jsx spread
     const turtleComponents = this.state.turtleData.map(turtle => (<TurtleUser {...turtle} />));
     return (
@@ -104,12 +85,6 @@ class TurtleList extends React.Component {
     );
   }
 }
-
-const Header = () => (
-  <header>
-    <h1>Giant monster turtles! Meet other giant monster turtles</h1>
-  </header>
-)
 
 const Footer = () => (
   <footer>

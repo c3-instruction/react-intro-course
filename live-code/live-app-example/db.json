@@ -1,0 +1,28 @@
+{
+  "turtles": [
+    {
+      "id": 0,
+      "name": "Gamera",
+      "shellRadius": 40,
+      "favoriteFood": "lava",
+      "environment": "sky",
+      "country": "japan"
+    },
+    {
+      "id": 1,
+      "name": "Leonardo",
+      "shellRadius": 1.5,
+      "favoriteFood": "pizza",
+      "environment": "urban",
+      "country": "USA"
+    },
+    {
+      "id": 2,
+      "name": "Crush",
+      "shellRadius": 0.5,
+      "favoriteFood": "sea food",
+      "environment": "ocean",
+      "country": "Aus"
+    }
+  ]
+}
